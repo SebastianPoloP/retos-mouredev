@@ -1,0 +1,10 @@
+# GitIgnore: 
+node_modules/
+dist/
+Logica/
+*.txt
+.vscode/
+.DS_Store
+Thumbs.db
+.env
+*.yaml
