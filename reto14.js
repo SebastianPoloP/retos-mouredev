@@ -7,7 +7,7 @@
  */
 
 const fechaActual = new Date();
-const miFecha = new Date('April 24, 2001');
+const miFecha = new Date('24 April, 2001');
 console.log(fechaActual);
 console.log(miFecha);
 
@@ -120,6 +120,21 @@ function comparationAge(ageOne, ageTwo){
   : `La segunda persona es mayor que la primera`
 }
 
+function comparationDate(dateOne, dateTwo){
+  const diff = dateOne - dateTwo;
+  const diffDay = diff/ (1000 * 3600 * 24);
+  return `${Math.floor(diffDay)} días.`
+}
+
+function missingDays(dateOne, days){
+  dateOne.setDate(dateOne.getDate() + days)
+  return `La fecha actual más ${days} días es: ${dateOne}`
+}
+
+function isLeapYear(year){
+  return (year % 4 === 0 && (year % 100 != 0 || year % 400 === 0));
+}
+
 console.log(fullDate(miFecha));
 console.log(fullTimeBorn(miFecha));
 console.log(`Con año biciesto: ${dayDate(miFecha)}`);
@@ -129,6 +144,18 @@ console.log(months[miFecha.getMonth()]);
 // Saber el signo zodical
 console.log(zodiacSings(miFecha));
 // Saber que persona es mayor
-let persona1 = new Date('December 31, 1956');
-let persona2 = new Date('December 23, 1956');
+let persona1 = new Date('Febrary 31, 1956');
+let persona2 = new Date('December 3, 1956');
 console.log(comparationAge(persona1, persona2));
+console.log(comparationDate(persona1, persona2))
+// Sumar días a una fecha
+const date = new Date('August 4, 1998');
+console.log(missingDays(date, 31))
+// Formato ISO
+console.log(miFecha.toISOString());
+// Formato Date Default
+console.log(miFecha.toString())
+
+// año
+const year = 2028;
+console.log(isLeapYear(year))
