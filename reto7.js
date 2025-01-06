@@ -5,8 +5,6 @@
  * o lista (dependiendo de las posibilidades de tu lenguaje).
  */
 
-const { stdout, stdin } = require('process');
-
 let arr = [1, 2, 3]
 
 const pila = (arr) => {
