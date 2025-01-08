@@ -31,6 +31,55 @@ filterNames(students, (res) => {
   console.log('Estudiantes con cantidad de letras mayor a 3 y menor que 8:', res);
 });
 
+// Array
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+// función high order con su respectivo callback function
+function filterNumbers(numbers, callback){
+  // Uso de filter para filtrar los datos como deseemos
+  const filterResult = numbers.filter(num => callback(num));
+  // Retornación de los numeros filtrados
+  return filterResult;
+}
+// Ejemplos de uso con funciones anonimas
+console.log(filterNumbers(arr, (num)=>{
+  return num % 2 !== 0;
+}));
+
+console.log(filterNumbers(arr, (num)=> {
+  return num % 2 === 0;
+}));
+
+console.log(filterNumbers(arr, (num)=>{
+  return num > 5;
+}));
+
+console.log(filterNumbers(arr, num => num < 5));
+
+// Función de filtrado parecido a filter
+Array.prototype.filterNumbers = function (callback){
+  // Array para almacenar los datos que deseamos
+  const filteredArray = [];
+  // ciclo para iterar en el array
+  for(let i = 0; i < this.length; i++){
+    // Llamada a la función callback
+    callback(this[i]) ? filteredArray.push(this[i]) : null;
+  }
+  // Retornamos los elementos filtadros
+  return filteredArray;
+}
+// Función para saber los numeros impares
+function isOdd(num){
+  return num % 2 !== 0;
+}
+// Función para saber los numeros pares
+function isEven(num){
+  return num % 2 === 0;
+}
+// Ejecución
+const nArr = [1, 2, 3, 4, 5];
+console.log(arr.filterNumbers(isEven));
+console.log(nArr.filterNumbers(x => x >= 3));
+
 /*
  * DIFICULTAD EXTRA (opcional):
  * Crea un simulador de pedidos de un restaurante utilizando callbacks.
