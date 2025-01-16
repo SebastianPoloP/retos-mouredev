@@ -75,13 +75,21 @@ class TaskManager{
   deleteTask(nameTask){
     console.time('deleteTask_Time');
     console.warn('Warning: A task will be deleted ⚠');
-    return this.task.keys().forEach(task => {
-      if(task.toLowerCase() === nameTask.toLowerCase()) {
-        console.info('The task has been successfully removed ℹ');
-        this.task.delete(task);
-        console.timeEnd('deleteTask_Time');
-      };
-    });
+    try {
+      let error = false;
+      this.task.keys().forEach(task => {
+        if(task.toLowerCase() === nameTask.toLowerCase()) {
+          error = true;
+          console.warn('The task has been successfully removed ℹ');
+          this.task.delete(task);
+          console.timeEnd('deleteTask_Time');
+        }
+      });
+
+      if(error != true) throw new Error('Error! task not found 🛑')
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   listTask(){
@@ -96,5 +104,5 @@ const task = new TaskManager();
 task.addTask('English', 'Homework in English - Exercise 2');
 task.addTask('Spanish', 'Homework in Spanish - Exercise 1');
 task.addTask('Math', 'Homework in Math - Training Math');
-task.deleteTask('English');
+task.deleteTask('Math');
 task.listTask();
