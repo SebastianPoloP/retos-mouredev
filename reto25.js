@@ -65,6 +65,7 @@ class TaskManager{
     this.task = new Map();
   }
 
+  // Método para agregar una nueva tarea
   addTask(name, descripcion){
     console.time('addTask_Time')
     this.task.set(this.name = name, this.descripcion = descripcion);
@@ -72,12 +73,15 @@ class TaskManager{
     console.timeEnd('addTask_Time');
   }
 
+  // Método para eliminar un tarea
   deleteTask(nameTask){
     console.time('deleteTask_Time');
     console.warn('Warning: A task will be deleted ⚠');
     try {
       let error = false;
+      // Recorre el map con el valor de las llaves
       this.task.keys().forEach(task => {
+        // Encuentra la tarea que se desea eliminar
         if(task.toLowerCase() === nameTask.toLowerCase()) {
           error = true;
           console.warn('The task has been successfully removed ℹ');
@@ -88,10 +92,13 @@ class TaskManager{
 
       if(error != true) throw new Error('Error! task not found 🛑')
     } catch (error) {
+      // Si no encuentra la tarea, muestra un mensaje de que no se encontro
       console.error(error);
+      console.timeEnd('deleteTask_Time');
     }
   }
 
+  // Método para listar las tareas
   listTask(){
     console.time('listTask_Time');
     console.info('Listing saved task');
@@ -104,5 +111,5 @@ const task = new TaskManager();
 task.addTask('English', 'Homework in English - Exercise 2');
 task.addTask('Spanish', 'Homework in Spanish - Exercise 1');
 task.addTask('Math', 'Homework in Math - Training Math');
-task.deleteTask('Math');
+task.deleteTask('Spanish');
 task.listTask();
