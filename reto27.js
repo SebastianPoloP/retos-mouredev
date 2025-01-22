@@ -73,7 +73,7 @@ console.log('Circle Area', circleCalculator.calcularArea());
  * 4. Comprueba que se cumple el OCP.
  */
 
-// Class Operation
+// Class Calculator
 class Calculator {
   constructor() {
     this.operations = {};
@@ -88,29 +88,38 @@ class Calculator {
     return this.operations[name].calculatorOperation(numbers);
   }
 }
-
+// Class Abstract
 class Operation {
+  constructor(){
+    if(this.constructor == Operation){
+      throw new Error('Abstract class cannot be instantiated.');
+    }
+  }
   calculatorOperation() { }
 }
 
+// Class Sum
 class Sum extends Operation {
   calculatorOperation(numbers) {
     return numbers.reduce((acc, current) => acc + current,)
   }
 }
 
+// Class Subtraction
 class Subtraction extends Operation {
   calculatorOperation(numbers) {
     return numbers.reduce((acc, current) => acc - current,);
   }
 }
 
+// Class Multiply
 class Multiply extends Operation {
   calculatorOperation(numbers) {
     return numbers.reduce((acc, current) => acc * current,)
   }
 }
 
+// Class Divide
 class Divide extends Operation {
   calculatorOperation(numbers) {
     const findZero = numbers.find(num => num === 0);
@@ -121,16 +130,20 @@ class Divide extends Operation {
   }
 }
 
+// Instance class Calculator
 const calculator = new Calculator();
+
+// Adding Operations to the Calculator
 calculator.addOperation('addition', new Sum());
 calculator.addOperation('subtraction', new Subtraction());
 calculator.addOperation('multiply', new Multiply());
 calculator.addOperation('divide', new Divide());
 
+// Calculating results
 console.log('Addition:',calculator.calculator('addition', [2,3]));
 console.log('Subtraction:',calculator.calculator('subtraction', [2,3]));
 console.log('Multiply:',calculator.calculator('multiply', [2,0]));
-console.log('Divide:',calculator.calculator('divide', [1,3]));
+console.log('Divide:',calculator.calculator('divide', [2,3,2]));
 
 // Add a new operation: Exponentiation
 class Exponentiation extends Operation {
@@ -152,5 +165,10 @@ class Exponentiation extends Operation {
   }
 }
 
+// Add Exponentiation Operation
 calculator.addOperation('exponentiation', new Exponentiation());
-console.log('Exponentiation:',calculator.calculator('exponentiation', [2,1,2]));
+console.log('Exponentiation:',calculator.calculator('exponentiation', [2,1]));
+
+// Using class Abstract
+const operation = new Operation();
+console.log(operation.calculatorOperation()); // Result: Error!
