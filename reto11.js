@@ -13,7 +13,6 @@
  *
  */
 
-const { info } = require('console');
 const fs = require('fs');
 const rl = require('readline').createInterface({
   input: process.stdin,
