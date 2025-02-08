@@ -132,6 +132,7 @@ function compareTracks(obj1, obj2) {
     );
   }
 }
+
 try {
   (async () => {
     const { access_token } = await bearerToken();
@@ -151,7 +152,7 @@ try {
     await compareFollowers(artist1, artist2);
     await comparePopularity(artist1, artist2);
 
-    await compareTracks(tracks1, tracks2)
+    compareTracks(tracks1, tracks2)
   })();
 } catch (error) {
   console.log(error);
