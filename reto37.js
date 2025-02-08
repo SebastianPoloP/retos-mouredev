@@ -110,7 +110,7 @@ async function comparePopularity(obj1, obj2) {
 
 async function allInfoArtist(obj, objtracks) {
   const { artists } = obj;
-  const { id, name, followers, genres, popularity, type } = artists.items[0];
+  const { name, followers, genres, popularity, type } = artists.items[0];
 
   console.log(`${name}`.blue, {
     followers: followers.total,

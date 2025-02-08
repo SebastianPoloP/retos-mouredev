@@ -28,6 +28,7 @@ const fs = require("node:fs");
 
 const nameFile = "mouredevPro.csv";
 
+// Función para leer el archivo CSV
 function readCsv(file) {
   const data = fs.readFileSync(file, "utf8");
   const users = [];
@@ -47,34 +48,30 @@ function readCsv(file) {
   return users;
 }
 
+// Seleccina tres (3) ganadores
 function selectWinners(data) {
-  const winners = new Set();
-
-  while (true) {
+  const winners = [];
+  
+  while (winners.length < 3) {
     const numRandom = Math.floor(Math.random() * data.length);
-    if (winners.size === 3) {
-      break;
+
+    if (!winners.includes(data[numRandom])) {
+      if (data[numRandom].status === "activo") {
+        winners.push(data[numRandom]);
+      }
     }
 
-    if (winners.has(data[numRandom])) {
-      continue;
-    }
-
-    if (data[numRandom].status === "activo") {
-      winners.add(data[numRandom]);
-    }
   }
 
   return winners;
 }
 
+// Muestra los tres ganadores
 function displayWinners(winners) {
-  const [sbscrption, discount, book] = winners;
-  console.log(`
-    Ganador de subscripción: ${(sbscrption.id, sbscrption.email)} 
-    Ganador de un Descuento: ${(discount.id, discount.email)} 
-    Ganador de un libro: ${(book.id, book.email)}`
-  );
+  const prize = ["Subcripción", "Descuento", "Libro"];
+  winners.forEach((winner, i) => {
+    console.log(`Ganador de ${prize[i]}: ${winner.email} (ID: ${winner.id})`);
+  });
 }
 
 try {
